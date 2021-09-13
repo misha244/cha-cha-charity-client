@@ -23,10 +23,14 @@ import { SIGNUP } from "../../graphql/mutations";
 
 import ReactHookFormSelect from "../ReactHookFormSelect";
 import ImageUpload from "../ImageUpload";
+import sign from "../../assets/images/illustrations/whole-images/sign-in.png";
 
 import "./SignUpForm.css";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
+  imageDiv: {
+    width: "100%",
+  },
   paper: {
     padding: "16px 0px",
   },
@@ -43,6 +47,7 @@ const useStyles = makeStyles(theme => ({
   formTitle: {
     padding: "16px",
     textAlign: "center",
+    fontWeight: "600",
   },
 }));
 
@@ -69,16 +74,16 @@ const SignUpForm = () => {
   const [imageUrl, setImageUrl] = useState();
 
   const [signUp] = useMutation(SIGNUP, {
-    onCompleted: data => {
+    onCompleted: (data) => {
       console.log(data);
       history.push("/login");
     },
-    onError: error => {
+    onError: (error) => {
       console.log(error);
     },
   });
 
-  const handleChangeCountry = event => {
+  const handleChangeCountry = (event) => {
     const cities = City.getCitiesOfCountry(
       event.currentTarget.getAttribute("name")
     );
@@ -86,7 +91,7 @@ const SignUpForm = () => {
     setCities(cities);
   };
 
-  const onSubmit = async formData => {
+  const onSubmit = async (formData) => {
     await signUp({
       variables: {
         signUpInput: { ...formData, imageUrl },
@@ -106,7 +111,7 @@ const SignUpForm = () => {
           control={control}
           rules={{ required: true }}
         >
-          {ACCOUNT_TYPES.map(accountType => {
+          {ACCOUNT_TYPES.map((accountType) => {
             return (
               <MenuItem
                 name={accountType}
@@ -237,7 +242,7 @@ const SignUpForm = () => {
           handleChange={handleChangeCountry}
           rules={{ required: true }}
         >
-          {countries.map(country => {
+          {countries.map((country) => {
             return (
               <MenuItem
                 name={country.isoCode}
@@ -330,6 +335,7 @@ const SignUpForm = () => {
 
   return (
     <Paper elevation={3} className={classes.paper}>
+      <img className={classes.imageDiv} alt="mhm" src={sign} />
       <Typography variant="h3" className={classes.formTitle}>
         Sign Up
       </Typography>

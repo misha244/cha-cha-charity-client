@@ -17,9 +17,14 @@ import { LOGIN } from "../../graphql/mutations";
 
 import { useUserContext } from "../../contexts/UserProvider";
 
+import sign from "../../assets/images/illustrations/whole-images/sign-in.png";
+
 import "./LoginForm.css";
 
 const useStyles = makeStyles((theme) => ({
+  imageDiv: {
+    width: "100%",
+  },
   paper: {
     padding: "16px 0px",
   },
@@ -36,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
   formTitle: {
     padding: "16px",
     textAlign: "center",
+    fontWeight: "600",
   },
 }));
 
@@ -81,7 +87,7 @@ const LoginForm = () => {
   const renderAccountDetails = () => (
     <Box>
       <Typography variant="h5" className={classes.formTitle}>
-        Account Details
+        Enter your info
       </Typography>
       <Box component="div" m={1}>
         <Controller
@@ -133,6 +139,7 @@ const LoginForm = () => {
 
   return (
     <Paper elevation={3} className={classes.paper}>
+      <img className={classes.imageDiv} alt="mhm" src={sign} />
       <Typography variant="h3" className={classes.formTitle}>
         Login
       </Typography>
@@ -144,7 +151,7 @@ const LoginForm = () => {
           <Button
             type="submit"
             variant="contained"
-            color="primary"
+            color="secondary"
             disableElevation
             size="large"
           >
